@@ -12,11 +12,12 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener("install", function (evt) {
+    console.log("attempting to install service worker and cache static assets");
     evt.waitUntil(
-      caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
+      caches.open(DATA_CACHE_NAME).then((cache) => { return cache.add("/api/transaction")})
     );
     evt.waitUntil(
-      caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
+      caches.open(CACHE_NAME).then((cache) => {return cache.addAll(FILES_TO_CACHE)})
     );
     self.skipWaiting();
   });
